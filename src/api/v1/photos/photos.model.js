@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 const SchemaPhotos = new mongoose.Schema(
   {
     auteur: {
@@ -19,10 +19,28 @@ const SchemaPhotos = new mongoose.Schema(
         comments: Schema.Types.Mixed,
       },
     ],
-  },
-  { timestamps: true }
+    createdAt: String,
+    updatedAt: String,
+  }
+  // ,
+  // { timestamps: true }
 );
 
+var autoPopulateChildren = function (next) {
+  this.populate({
+    path: "comments",
+    populate: {
+      path: "auteur",
+      model: "User",
+    },
+  });
+  next();
+};
+
+SchemaPhotos.pre("findOne", autoPopulateChildren).pre(
+  "find",
+  autoPopulateChildren
+);
 const Photo = mongoose.model("Photo", SchemaPhotos);
 
 export default Photo;

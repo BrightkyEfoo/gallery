@@ -8,13 +8,9 @@ const userSchema = new Schema({
     email : {
         type : String,
         required : true,
-        unique: (true)
+        unique: true
     },
     motDePasse : {
-        type : String,
-        required : true
-    },
-    repeat_password : {
         type : String,
         required : true
     },

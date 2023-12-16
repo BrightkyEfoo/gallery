@@ -11,7 +11,6 @@ const userValidate = Joi.object({
   motDePasse: Joi.string().min(7)
     .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
     .required(),
-  repeat_password: Joi.ref("motDePasse"),
   photoDeProfil: Joi.string()
     .pattern(new RegExp(/.(jpg|jpeg|png|gif|bmp)$/i)),
 });

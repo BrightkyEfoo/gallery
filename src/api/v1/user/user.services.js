@@ -31,11 +31,15 @@ const create = async (userQuery) => {
  */
 const read = async (id) => {
   try {
-    const tempUser = await User.findById(id).populate("photos");
+    const tempUser = await User.findById(id).populate({
+      path: "photos",
+      model: "Photo",
+    });
     const user = tempUser.toJSON();
     delete user.motDePasse;
     return user;
   } catch (error) {
+    console.log(error);
     throw new Error("userId does not exist!");
   }
 };
@@ -45,7 +49,7 @@ const read = async (id) => {
  * @param {String} id id de the utilisatrice you vouloir update
  * @param {UserUpdateQuery} userUpdate
  * @returns
- * 
+ *
  */
 const update = async (id, userUpdate) => {
   try {
@@ -81,18 +85,20 @@ const suppress = async (id) => {
  * @returns 1 when password didn't match was not found
  */
 const compare = async (email, motDePasse) => {
+  console.log(email, motDePasse)
   try {
     const user = await User.findOne({ email });
+    console.log('user', user)
     if (!user) {
+      console.log("not exist")
       return 2;
     } else if (await bcrypt.compare(motDePasse, user.motDePasse)) {
       const tempUser = { ...user.toJSON() };
       delete tempUser.motDePasse;
       return tempUser;
-    }else {
+    } else {
       return 1;
     }
-    
   } catch (error) {
     throw new Error(error);
   }

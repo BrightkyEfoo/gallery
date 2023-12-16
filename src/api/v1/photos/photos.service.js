@@ -23,8 +23,17 @@ const create = async (dataPhoto) => {
 // read photo
 const read = async (id) => {
   try {
-    const photo = await Photo.findById(id);
-    return photo;
+    const photo = await Photo.findOne({ _id: id }).populate({
+      path: "auteur",
+      populate: {
+        path: "photos",
+        model: "Photo",
+      },
+    });
+    const tempPhoto = photo.toJSON();
+    delete tempPhoto.auteur.motDePasse;
+    delete tempPhoto.auteur.repeat_password;
+    return tempPhoto;
   } catch (error) {
     throw new Error("photoId does not exist!");
   }
@@ -49,8 +58,12 @@ const update = async (id, dataSet) => {
  */
 const comment = async (id, pos, value, auteurId) => {
   try {
+    console.log(pos);
+    console.log(id);
+    console.log(value);
+    console.log(auteurId);
+
     let photo = await read(id);
-    photo = photo.toJSON();
     const auteur = await userService.read(auteurId);
     const newComment = {
       auteur: new Types.ObjectId(auteurId),
@@ -84,12 +97,18 @@ const remove = async (id) => {
   }
 };
 
+const getPhotos = async () => {
+  const photos = await Photo.find().populate("auteur");
+  return photos;
+};
+
 const photoService = {
   create,
   read,
   update,
   remove,
   comment,
+  getPhotos,
 };
 
 export default photoService;

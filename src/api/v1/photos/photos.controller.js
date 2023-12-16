@@ -4,7 +4,11 @@ import mongoose from "mongoose";
 
 // creation d'une photo
 const create = async (req, res) => {
-  const { userId, lien, description } = req.body;
+  console.log("req.body", req.body);
+  const { userId, description } = req.body;
+  const lien = "http://localhost:3000/public/images/" + req.file.filename;
+  console.log(req.body);
+  console.log(req.file);
 
   try {
     const { error } = photoValidate.validate({
@@ -12,11 +16,18 @@ const create = async (req, res) => {
       lien,
       description,
     });
+    const date = new Date()
+      .toLocaleString(undefined, { dateStyle: "full" })
+      .toString();
+    const time = new Date().toLocaleTimeString().toString();
     if (!error) {
       let photo = await photoService.create({
         description,
         lien,
         auteur: new mongoose.Types.ObjectId(userId),
+        createdAt: date + " " + time,
+        updatedAt: date + " " + time,
+        // updatedA: new Date().toLocaleString(),
       });
       photo = await photo.populate("auteur");
       const msg = "success create photo";
@@ -102,12 +113,18 @@ const comment = async (req, res) => {
   res.json({ photo });
 };
 
+const getPhotos = async (req, res) => {
+  const photos = await photoService.getPhotos();
+  res.json({ photos });
+};
+
 const photoController = {
   create,
   read,
   update,
   remove,
   comment,
+  getPhotos,
 };
 
 export default photoController;

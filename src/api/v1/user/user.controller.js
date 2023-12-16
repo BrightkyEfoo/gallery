@@ -6,7 +6,7 @@ import userValidate from "./user.Validate.js";
 
 const createUserHandler = async (req, res) => {
   // on suppose que l'on a verifie tous les parametres de la requetes
-  const { nom, email, motDePasse, photoDeProfil, repeat_password } = req.body;
+  const { nom, email, motDePasse, photoDeProfil} = req.body;
 
   bcrypt
     .hash(motDePasse, 10)
@@ -16,14 +16,12 @@ const createUserHandler = async (req, res) => {
         email,
         motDePasse,
         photoDeProfil,
-        repeat_password,
       });
       const userToCreate = {
         nom,
         email,
         motDePasse: passwordCrypt,
         photoDeProfil,
-        repeat_password,
       };
       console.log("userToCreate", userToCreate);
       if (!error) {
@@ -92,7 +90,7 @@ const loginUserHandler = async (req, res) => {
   try {
     const user = await userService.compare(email, motDePasse);
     if (user === 2 || user === 1) {
-      return res.json({ msg: "Something went wrong", user });
+      return res.status(401).json({ msg: "Something went wrong", user });
     } else {
       // creation du jwt
       const token = jwt.sign(
@@ -104,11 +102,12 @@ const loginUserHandler = async (req, res) => {
         privateKey,
         { expiresIn: "24h" }
       );
-      return res.json({ msg: `Hello ${user.nom}!`, token });
+      return res.json({ msg: `Hello ${user.nom}!`, token, user });
     }
   } catch (error) {
-    console.log("error: when connect a user: ", error);
-    return res.sendStatus(400);
+    const msg = "error: when connect a user: "
+    console.log(msg, error);
+    return res.status(401).json({msg, error});
   }
 };
 
