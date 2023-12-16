@@ -5,6 +5,7 @@ export const dbInit = async () => {
     await mongoose.connect(process.env.DB_URI);
     return true;
   } catch (error) {
+    console.log("error", error);
     return false;
   }
 };
