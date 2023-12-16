@@ -17,9 +17,9 @@ function Loging() {
 
   const handleSubmit = () => {
     axios
-      .post("http://localhost:3000/api/v1/user", {
+      .post("https://gallery-0cb9.onrender.com/api/v1/user", {
         email: loginState.email,
-        photoDeProfil: "http://localhost:3000/public/4.jpeg",
+        photoDeProfil: "https://gallery-0cb9.onrender.com/public/4.jpeg",
         motDePasse: loginState.password,
         nom: loginState.nom,
       })

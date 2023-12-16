@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const create = async (req, res) => {
   console.log("req.body", req.body);
   const { userId, description } = req.body;
-  const lien = "http://localhost:3000/public/images/" + req.file.filename;
+  const lien = "https://gallery-0cb9.onrender.com/public/images/" + req.file.filename;
   console.log(req.body);
   console.log(req.file);
 

@@ -9,7 +9,7 @@ import path from "path";
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 // on lie le projet aux variables d'environnement
-env.config();
+// env.config();
 
 // instanciation de l'application express
 const app = express();

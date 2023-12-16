@@ -27,7 +27,7 @@ const PhotoPage = () => {
   useEffect(() => {
     const v = async () => {
       const { data } = await axios.get(
-        "http://localhost:3000/api/v1/photo/" + id
+        "https://gallery-0cb9.onrender.com/api/v1/photo/" + id
       );
       console.log(data.photo);
       setPhoto(data.photo);
@@ -74,7 +74,7 @@ const CommentForm = ({ locationArray, commentLength, close }) => {
     const userId = JSON.parse(localStorage.getItem("userId"));
     console.log("locationArray", locationArray);
     const a = await axios.post(
-      "http://localhost:3000/api/v1/photo/test-comments",
+      "https://gallery-0cb9.onrender.com/api/v1/photo/test-comments",
       {
         id: photoId,
         pos: [...locationArray, commentLength],

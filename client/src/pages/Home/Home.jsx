@@ -6,7 +6,7 @@ import axios from "axios";
 const Home = () => {
   const [photos, setPhotos] = useState();
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/photo").then((res) => {
+    axios.get("https://gallery-0cb9.onrender.com/api/v1/photo").then((res) => {
       console.log("res.data", res.data);
       setPhotos(res.data.photos);
     });

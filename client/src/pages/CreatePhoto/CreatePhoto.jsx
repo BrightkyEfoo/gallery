@@ -13,7 +13,7 @@ function CreatePhoto() {
     auteur: user?.nom,
     updatedAt: "*/*/*",
     _id: user?._id,
-    lien: "http://localhost:3000/public/paysage1.png",
+    lien: "https://gallery-0cb9.onrender.com/public/paysage1.png",
   });
   const [preview, setPreview] = useState(null);
   const [file, setFile] = useState();
@@ -26,7 +26,7 @@ function CreatePhoto() {
     formData.append("lien", photos.lien);
     console.log(file, photos._id, photos.description);
     axios
-      .post("http://localhost:3000/api/v1/photo", formData, {
+      .post("https://gallery-0cb9.onrender.com/api/v1/photo", formData, {
         headers: {
           Authorization: token,
         },

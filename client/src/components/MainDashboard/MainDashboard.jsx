@@ -10,7 +10,7 @@ const MainDashboard = () => {
   useEffect(() => {
     const tempUser = JSON.parse(localStorage.getItem("User"));
     axios
-      .get(`http://localhost:3000/api/v1/user/${tempUser._id}`)
+      .get(`https://gallery-0cb9.onrender.com/api/v1/user/${tempUser._id}`)
       .then((res) => {
         console.log("res.data", res.data);
         setUser(res.data.user);

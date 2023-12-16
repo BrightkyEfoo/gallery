@@ -5,7 +5,7 @@ export const userInitializer = async () => {
     nom: "johndoe",
     email: "johndoe@exemple.com",
     photoDeProfil:
-      "http://localhost:3000/api/images/johndoe/photoDeProfil.png",
+      "https://gallery-0cb9.onrender.com/api/images/johndoe/photoDeProfil.png",
     motDePasse: "azerty",
   };
   await User.create(user);

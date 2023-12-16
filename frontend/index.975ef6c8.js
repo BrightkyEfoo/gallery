@@ -33671,7 +33671,7 @@ const Home = ()=>{
     _s();
     const [photos, setPhotos] = (0, _react.useState)();
     (0, _react.useEffect)(()=>{
-        (0, _axiosDefault.default).get("http://localhost:3000/api/v1/photo").then((res)=>{
+        (0, _axiosDefault.default).get("https://gallery-0cb9.onrender.com/api/v1/photo").then((res)=>{
             console.log("res.data", res.data);
             setPhotos(res.data.photos);
         });
@@ -66492,7 +66492,7 @@ const PhotoPage = ()=>{
     });
     (0, _react.useEffect)(()=>{
         const v = async ()=>{
-            const { data } = await (0, _axiosDefault.default).get("http://localhost:3000/api/v1/photo/" + id);
+            const { data } = await (0, _axiosDefault.default).get("https://gallery-0cb9.onrender.com/api/v1/photo/" + id);
             console.log(data.photo);
             setPhoto(data.photo);
             localStorage.setItem("photoId", JSON.stringify(data.photo._id));
@@ -66604,7 +66604,7 @@ const CommentForm = ({ locationArray, commentLength, close })=>{
         const photoId = JSON.parse(localStorage.getItem("photoId"));
         const userId = JSON.parse(localStorage.getItem("userId"));
         console.log("locationArray", locationArray);
-        const a = await (0, _axiosDefault.default).post("http://localhost:3000/api/v1/photo/test-comments", {
+        const a = await (0, _axiosDefault.default).post("https://gallery-0cb9.onrender.com/api/v1/photo/test-comments", {
             id: photoId,
             pos: [
                 ...locationArray,
@@ -66951,9 +66951,9 @@ function Loging() {
         rePassword: ""
     });
     const handleSubmit = ()=>{
-        (0, _axiosDefault.default).post("http://localhost:3000/api/v1/user", {
+        (0, _axiosDefault.default).post("https://gallery-0cb9.onrender.com/api/v1/user", {
             email: loginState.email,
-            photoDeProfil: "http://localhost:3000/public/4.jpeg",
+            photoDeProfil: "https://gallery-0cb9.onrender.com/public/4.jpeg",
             motDePasse: loginState.password,
             nom: loginState.nom
         }).then((res)=>{
@@ -67123,7 +67123,7 @@ function Register() {
     });
     const [user, setUser] = (0, _react.useState)();
     const handleClick = ()=>{
-        (0, _axiosDefault.default).post("http://localhost:3000/api/v1/user/login", {
+        (0, _axiosDefault.default).post("https://gallery-0cb9.onrender.com/api/v1/user/login", {
             email: registerState.email,
             motDePasse: registerState.passWord
         }).then((res)=>{
@@ -67257,7 +67257,7 @@ const MainDashboard = ()=>{
     const [user, setUser] = (0, _react.useState)();
     (0, _react.useEffect)(()=>{
         const tempUser = JSON.parse(localStorage.getItem("User"));
-        (0, _axiosDefault.default).get(`http://localhost:3000/api/v1/user/${tempUser._id}`).then((res)=>{
+        (0, _axiosDefault.default).get(`https://gallery-0cb9.onrender.com/api/v1/user/${tempUser._id}`).then((res)=>{
             console.log("res.data", res.data);
             setUser(res.data.user);
         });
@@ -67371,7 +67371,7 @@ function CreatePhoto() {
         auteur: user?.nom,
         updatedAt: "*/*/*",
         _id: user?._id,
-        lien: "http://localhost:3000/public/paysage1.png"
+        lien: "https://gallery-0cb9.onrender.com/public/paysage1.png"
     });
     const [preview, setPreview] = (0, _react.useState)(null);
     const [file, setFile] = (0, _react.useState)();
@@ -67382,7 +67382,7 @@ function CreatePhoto() {
         formData.append("description", photos.description);
         formData.append("lien", photos.lien);
         console.log(file, photos._id, photos.description);
-        (0, _axiosDefault.default).post("http://localhost:3000/api/v1/photo", formData, {
+        (0, _axiosDefault.default).post("https://gallery-0cb9.onrender.com/api/v1/photo", formData, {
             headers: {
                 Authorization: token
             }
