@@ -1,0 +1,12 @@
+h1 {
+  color: blue;
+}
+.home {
+  display: grid;
+  color: white;
+  font-family: "Poppins";
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(300px , 1fr));
+  grid-auto-rows: 200px;
+  place-items: center;
+}

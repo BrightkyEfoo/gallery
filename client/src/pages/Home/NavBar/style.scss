@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navBar-logo{
+    color: white;
+    font-size: 2em;
+    padding: 0 10px;
+}
+.navBar{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 20px 25px;
+    border-right: 1px solid rgb(58, 58, 58);
+    // font-family: 'Poppins';
+}
+.navBar-bloklienIcon{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    height: 70%;
+}
+
+.navBar-voirPlus{
+    padding: 0 10px;
+}

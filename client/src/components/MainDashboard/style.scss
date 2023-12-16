@@ -1,0 +1,24 @@
+.dashboard-profil-photo-container {
+  margin-top: 25px;
+  display: grid;
+  color: white;
+  font-family: "Poppins";
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 200px;
+  place-items: center;
+}
+
+.dashboard-profil {
+  position: relative;
+  .pp {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 30px;
+    z-index: 100;
+    right: 50px;
+  }
+}
